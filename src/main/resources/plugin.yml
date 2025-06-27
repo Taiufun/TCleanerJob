@@ -1,4 +1,5 @@
 name: TCleanerJob
 version: '1.0-SNAPSHOT'
 main: ru.taiufun.tCleanerJob.TCleanerJob
-depend: [WorldGuard]
+depend: [WorldGuard, WorldEdit]
+api-version: 1.16
