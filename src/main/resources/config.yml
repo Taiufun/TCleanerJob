@@ -1,0 +1,18 @@
+
+region: tjobs_cleaner
+
+# Задержка восстановления в секундах.
+# Можно указать точное число: 10
+# Или диапазон: 10r15 (рандом от 10 до 15 включительно)
+respawn-delay: 10r15
+
+# Список растений, которые отслеживаются
+plants:
+  - GRASS
+
+
+reward:
+  # Переменные {player} {amount}
+  command: "eco give {player} {amount}"
+  # Та-же система чтои в respawn-delay
+  amount: "10r20"
