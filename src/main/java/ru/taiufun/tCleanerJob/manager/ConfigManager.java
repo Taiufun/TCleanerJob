@@ -45,11 +45,11 @@ public class ConfigManager {
     }
 
     public int getRespawnDelayTicks() {
-        return RandomUtil.tryParseRandomOrFixed(respawnDelayRaw)
-                .orElseGet(() -> {
-                    plugin.getLogger().warning("Неверный формат respawn-delay в config.yml. Используется 10 сек по умолчанию.");
-                    return 10;
-                }) * 20;
+        return (int) (RandomUtil.tryParseRandomOrFixed(respawnDelayRaw, false)
+                        .orElseGet(() -> {
+                            plugin.getLogger().warning("Неверный формат respawn-delay в config.yml. Используется 10 сек по умолчанию.");
+                            return 10;
+                        }) * 20);
     }
 
     public Set<Material> getPlantTypes() {

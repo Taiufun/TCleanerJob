@@ -1,27 +1,39 @@
 package ru.taiufun.tCleanerJob.util;
 
-import java.util.OptionalInt;
+import java.util.OptionalDouble;
 import java.util.concurrent.ThreadLocalRandom;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class RandomUtil {
 
-    public static OptionalInt tryParseRandomOrFixed(String input) {
+    public static OptionalDouble tryParseRandomOrFixed(String input, boolean isFloat) {
         try {
             if (input.contains("r")) {
                 String[] parts = input.split("r");
-                int min = Integer.parseInt(parts[0]);
-                int max = Integer.parseInt(parts[1]);
+                double min = Double.parseDouble(parts[0]);
+                double max = Double.parseDouble(parts[1]);
                 if (min > max) {
-                    int temp = min;
+                    double temp = min;
                     min = max;
                     max = temp;
                 }
-                return OptionalInt.of(ThreadLocalRandom.current().nextInt(min, max + 1));
+                double result = isFloat
+                        ? ThreadLocalRandom.current().nextDouble(min, max)
+                        : ThreadLocalRandom.current().nextInt((int) min, (int) max + 1);
+                if (isFloat) {
+                    result = BigDecimal.valueOf(result).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                }
+                return OptionalDouble.of(result);
             } else {
-                return OptionalInt.of(Integer.parseInt(input));
+                double value = Double.parseDouble(input);
+                if (isFloat) {
+                    value = BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP).doubleValue();
+                }
+                return OptionalDouble.of(value);
             }
         } catch (Exception e) {
-            return OptionalInt.empty();
+            return OptionalDouble.empty();
         }
     }
 }

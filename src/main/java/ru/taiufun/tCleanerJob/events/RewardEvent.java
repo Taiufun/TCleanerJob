@@ -15,7 +15,7 @@ public class RewardEvent {
 
     public void giveReward(Player player) {
         String rawAmount = plugin.getConfig().getString("reward.amount", "10");
-        int amount = RandomUtil.tryParseRandomOrFixed(rawAmount)
+        double amount = RandomUtil.tryParseRandomOrFixed(rawAmount, true)
                 .orElseGet(() -> {
                     plugin.getLogger().warning("Неверный формат reward.amount в config.yml. Используется 10 по умолчанию.");
                     return 10;
