@@ -22,7 +22,7 @@ public class RewardEvent {
                     return 10;
                 });
 
-        String commandTemplate = plugin.getConfig().getString("reward.command", "eco give {player} {amount}");
+        String commandTemplate = plugin.getPluginConfig().getRewardCommand();
         String finalCommand = commandTemplate
                 .replace("{player}", player.getName())
                 .replace("{amount}", String.valueOf(amount));

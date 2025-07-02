@@ -1,6 +1,7 @@
 package ru.taiufun.tCleanerJob;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.taiufun.tCleanerJob.commands.ReloadCommand;
 import ru.taiufun.tCleanerJob.list.BlockBreakListener;
 import ru.taiufun.tCleanerJob.manager.ConfigManager;
 
@@ -12,6 +13,7 @@ public final class TCleanerJob extends JavaPlugin {
     public void onEnable() {
         pluginConfig = new ConfigManager(this);
         getServer().getPluginManager().registerEvents(new BlockBreakListener(this), this);
+        getCommand("tcleanerjob").setExecutor(new ReloadCommand(this));
     }
 
     public ConfigManager getPluginConfig() {
