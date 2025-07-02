@@ -1,6 +1,7 @@
 package ru.taiufun.tCleanerJob.events;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import ru.taiufun.tCleanerJob.TCleanerJob;
 import ru.taiufun.tCleanerJob.util.RandomUtil;
@@ -13,11 +14,11 @@ public class RewardEvent {
         this.plugin = plugin;
     }
 
-    public void giveReward(Player player) {
-        String rawAmount = plugin.getConfig().getString("reward.amount", "10");
+    public void giveReward(Player player, Material type) {
+        String rawAmount = plugin.getPluginConfig().getRewardForPlant(type);
         double amount = RandomUtil.tryParseRandomOrFixed(rawAmount, true)
                 .orElseGet(() -> {
-                    plugin.getLogger().warning("Неверный формат reward.amount в config.yml. Используется 10 по умолчанию.");
+                    plugin.getLogger().warning("Неверный формат награды для " + type.name() + ". Используется 10 по умолчанию.");
                     return 10;
                 });
 
@@ -28,4 +29,5 @@ public class RewardEvent {
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), finalCommand);
     }
+
 }

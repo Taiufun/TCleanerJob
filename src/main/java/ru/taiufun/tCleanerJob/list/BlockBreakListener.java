@@ -36,7 +36,7 @@ public class BlockBreakListener implements Listener {
         if (!RegionChecker.isInRegion(block, region)) return;
 
         event.setDropItems(false);
-        rewardEvent.giveReward(player);
+        rewardEvent.giveReward(player, type);
         final var location = block.getLocation().clone();
         int delayTicks = plugin.getPluginConfig().getRespawnDelayTicks();
 
