@@ -8,11 +8,14 @@ respawn-delay: 10r15
 
 # Список растений, которые отслеживаются
 plants:
-  - GRASS
+  WHEAT:
+    reward: "5r10"
+  CARROTS:
+    reward: "2r4"
+  POTATOES:
+    reward: "3"
 
 
 reward:
   # Переменные {player} {amount}
   command: "eco give {player} {amount}"
-  # Та-же система чтои в respawn-delay
-  amount: "10r20"
